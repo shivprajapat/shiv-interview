@@ -12,9 +12,7 @@ const Home = () => {
     const createNewRoom = (e) => {
         e.preventDefault();
         const id = uuidV4();
-        setRoomId(id)
-        console.log(id);
-        console.log(roomId);
+        setRoomId(id);
         toast.success('Created a new room');
     }
     const joinRoom = () => {
@@ -28,6 +26,11 @@ const Home = () => {
         navigate(`/editor/${roomId}`, {
             state: { username }
         });
+    }
+    const handleInputEnter = (e) => {
+        if (e.code === 'Enter') {
+            joinRoom()
+        }
     }
     return (
         <div className="homePageWrapper">
@@ -43,13 +46,16 @@ const Home = () => {
                         type="text"
                         className="inputBox"
                         placeholder="Room ID" onChange={(e) => setRoomId(e.target.value)}
-                        value={roomId} />
+                        value={roomId}
+                        onKeyUp={handleInputEnter}
+                    />
                     <input
                         type="text"
                         className="inputBox"
                         placeholder="UserName"
                         onChange={(e) => setUsername(e.target.value)}
-                        value={username} />
+                        value={username}
+                        onKeyUp={handleInputEnter} />
                     <button className="btn joinBtn" onClick={joinRoom}>
                         Join
                     </button>
