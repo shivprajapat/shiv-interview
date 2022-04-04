@@ -1,18 +1,9 @@
-import Home from './components/Home';
-import AddUser from './components/AddUser'
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
-function App() {
+import React from 'react'
+
+const App = () => {
   return (
-    <div className="App">
-      <Routes>
-      <Route path='/' exact element={<Home/>}/>
-      <Route path='/add-user' element={<AddUser/>}/>
-      </Routes>
-    </div>
-  );
+    <div>App</div>
+  )
 }
 
-export default App;
+export default App
