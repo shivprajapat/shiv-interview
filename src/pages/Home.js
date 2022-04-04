@@ -1,6 +1,17 @@
-import React from 'react'
-import  codeImg  from '../code-sync.png'
+import React, { useState } from 'react'
+import codeImg from '../code-sync.png'
+import { v4 as uuidV4 } from 'uuid';
+
 const Home = () => {
+
+    const [roomId, setRoomId] = useState('');
+    const createNewRoom = (e) => {
+        e.preventDefault();
+        const id = uuidV4();
+        setRoomId(id)
+        console.log(id);
+        console.log(roomId);
+    }
     return (
         <div className="homePageWrapper">
             <div className="formWrapper">
@@ -14,17 +25,19 @@ const Home = () => {
                     <input
                         type="text"
                         className="inputBox"
-                        placeholder="Room ID" />
+                        placeholder="Room ID" onChange={(e) => setRoomId(e.target.value)}
+                        value={roomId}/>
                     <input
                         type="text"
                         className="inputBox"
-                        placeholder="UserName" />
+                        placeholder="UserName"
+                        />
                     <button className="btn joinBtn" >
                         Join
                     </button>
                     <span className="createInfo">
                         If you don't have an invite then create &nbsp;
-                        <a href="/" className="createNewBtn"> new room </a>
+                        <a href="/" className="createNewBtn" onClick={createNewRoom}> new room </a>
                     </span>
                 </div>
             </div>
