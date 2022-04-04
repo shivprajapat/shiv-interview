@@ -1,16 +1,33 @@
 import React, { useState } from 'react'
 import codeImg from '../code-sync.png'
 import { v4 as uuidV4 } from 'uuid';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
 
     const [roomId, setRoomId] = useState('');
+    const [username, setUsername] = useState('');
     const createNewRoom = (e) => {
         e.preventDefault();
         const id = uuidV4();
         setRoomId(id)
         console.log(id);
         console.log(roomId);
+        toast.success('Created a new room');
+    }
+    const joinRoom = () => {
+
+        if (!roomId || !username) {
+            toast.error('ROOM ID & username is required');
+            return;
+        }
+
+        // Redirect
+        navigate(`/editor/${roomId}`, {
+            state: { username }
+        });
     }
     return (
         <div className="homePageWrapper">
@@ -26,13 +43,14 @@ const Home = () => {
                         type="text"
                         className="inputBox"
                         placeholder="Room ID" onChange={(e) => setRoomId(e.target.value)}
-                        value={roomId}/>
+                        value={roomId} />
                     <input
                         type="text"
                         className="inputBox"
                         placeholder="UserName"
-                        />
-                    <button className="btn joinBtn" >
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username} />
+                    <button className="btn joinBtn" onClick={joinRoom}>
                         Join
                     </button>
                     <span className="createInfo">
