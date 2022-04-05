@@ -5,11 +5,15 @@ import Editor from '../components/Editor'
 const EditorPage = () => {
   const [clients, setClients] = useState([
     {
-      slcketId: 1, username: "Shiv Kumar",
+      slcketId: 1, username: "Om Prajapat",
     },
     {
-      slcketId: 2, username: "Ram Kumar",
+      slcketId: 2, username: "Shiv KP",
     },
+    {
+      slcketId: 3, username: "Mahesh",
+    },
+
   ])
   return (
     <div className="mainWrap">
