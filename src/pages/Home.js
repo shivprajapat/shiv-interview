@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+import codeImg from '../code-sync.png'
 const Home = () => {
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const Home = () => {
             <div className="formWrapper">
                 <img
                     className="homePageLogo"
-                    src="/code-sync.png"
+                    src={codeImg}
                     alt="code-sync-logo"
                 />
                 <h4 className="mainLabel">Paste invitation ROOM ID</h4>

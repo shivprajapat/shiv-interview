@@ -1,8 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import codeImg from '../code-sync.png'
 import Client from '../components/Client'
 import Editor from '../components/Editor'
+import { initSocket } from '../socket'
+import ACTIONS from '../Actions';
+import { useParams, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 const EditorPage = () => {
+
+
+  const socketRef = useRef(null);
+  const location = useLocation();
+  const parms = useParams();
+  console.log(parms);
+  const reactNavigator = useNavigate();
+
+  useEffect(() => {
+    const init = async () => {
+      socketRef.current = await initSocket();
+      socketRef.current.on('connect_error', (err) => handleErrors(err));
+      socketRef.current.on('connect_failed', (err) => handleErrors(err));
+
+      function handleErrors(e) {
+        console.log('socket error', e);
+        toast.error('Socket connection failed, try again later.');
+        reactNavigator('/');
+      }
+
+      if (!location.state) {
+        return <Navigate />
+      }
+
+      socketRef.current.emit(ACTIONS.JOIN, {
+        // roomId,
+        username: location.state?.username,
+      });
+    }
+    init()
+  }, []);
+
   const [clients, setClients] = useState([
     {
       slcketId: 1, username: "Om Prajapat",
