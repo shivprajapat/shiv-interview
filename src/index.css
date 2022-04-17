@@ -14,6 +14,7 @@ body {
   justify-content: center;
   color: #fff;
   height: 100vh;
+  flex-direction: column;
 }
 
 .formWrapper {
@@ -22,11 +23,6 @@ body {
   border-radius: 10px;
   width: 400px;
   max-width: 90%;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
 }
 
 footer a {
@@ -118,7 +114,7 @@ footer a:hover {
 
 .clientsList {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
 }
